@@ -178,14 +178,20 @@
   }
   </script>
 
-  <!-- Simulator teleoperation task tabs -->
+  <!-- Teleoperation task tabs and responsive video layouts -->
   <style>
-    .simulator-teleoperation-section {
+    /* Keep the publication title on two deliberate lines on desktop. */
+    .publication-title-two-lines span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .teleoperation-section {
       padding-top: 2.5rem;
       padding-bottom: 3rem;
     }
 
-    .sim-task-tabs {
+    .task-tabs {
       display: flex;
       justify-content: center;
       gap: 0;
@@ -195,7 +201,7 @@
       scrollbar-width: thin;
     }
 
-    .sim-task-tab {
+    .task-tab {
       flex: 0 0 auto;
       appearance: none;
       background: transparent;
@@ -212,13 +218,13 @@
       transition: color 0.2s ease, border-color 0.2s ease;
     }
 
-    .sim-task-tab:hover,
-    .sim-task-tab:focus-visible {
+    .task-tab:hover,
+    .task-tab:focus-visible {
       color: #3273dc;
       outline: none;
     }
 
-    .sim-task-tab.is-active {
+    .task-tab.is-active {
       color: #3273dc;
       border-bottom-color: #3273dc;
     }
@@ -237,7 +243,8 @@
       background: #000;
     }
 
-    .sim-video-frame video {
+    .sim-video-frame video,
+    .real-video-frame video {
       display: block;
       width: 100%;
       height: 100%;
@@ -245,12 +252,38 @@
       background: #000;
     }
 
+    .real-video-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .real-video-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #000;
+    }
+
+    @media screen and (max-width: 1024px) {
+      .publication-title-two-lines {
+        font-size: 2.45rem !important;
+      }
+    }
+
     @media screen and (max-width: 768px) {
-      .sim-task-tabs {
+      .publication-title-two-lines span {
+        white-space: normal;
+      }
+
+      .publication-title-two-lines {
+        font-size: 2rem !important;
+      }
+
+      .task-tabs {
         justify-content: flex-start;
       }
 
-      .sim-task-tab {
+      .task-tab {
         font-size: 0.95rem;
         padding: 0.75rem 1rem;
       }
@@ -259,6 +292,10 @@
         grid-template-columns: 1fr;
         gap: 0.75rem;
         background: transparent;
+      }
+
+      .real-video-frame {
+        aspect-ratio: 4 / 3;
       }
     }
   </style>
@@ -327,8 +364,10 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">ProxiDex: Learning Dynamics-Guided Proximity
-Policy for Dexterous Manipulation</h1>
+            <h1 class="title is-1 publication-title publication-title-two-lines">
+              <span>ProxiDex: Learning Dynamics-Guided</span>
+              <span>Proximity Policy for Dexterous Manipulation</span>
+            </h1>
             <div class="is-size-5 publication-authors">
               <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block">
@@ -393,14 +432,32 @@ Policy for Dexterous Manipulation</h1>
 <!-- End teaser video -->
 
 
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <!-- TODO: Replace with your paper abstract -->
+          <p>
+            Multi-finger dexterous manipulation relies on stable hand-object interactions, yet these interactions are partially observable in practice. Visual observations are often occluded by the hand, tactile sensors introduce hardware-specific modalities and calibration burdens, and existing policies rarely model how these cues evolve under actions, making them brittle under contact uncertainty. To address these, we present ProxiDex, a dynamics-guided proximity policy framework that treats hand-object proximity as an interaction state for dexterous manipulation. ProxiDex reconstructs interaction point clouds and converts geometric distances into proximity cues, forming a hardware-agnostic contact representation that provides immersive feedback during VR teleoperation. Built on this representation, ProxiDex learns action-conditioned proximity dynamics with a coupled forward–inverse design: future observation latents are predicted from actions, while proximity variations are decoded from latent changes. Leveraging these dynamics, ProxiDex adaptively reweights proximity tokens across manipulation phases and uses dynamics-consistency supervision to guide policy inference, stabilizing action generation under unreliable visual feedback. Simulation and real-world experiments demonstrate improved success rates and robustness over representative baselines across standard, unseen objects, and perturbation scenarios.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
 <!-- Simulator teleoperation videos -->
-<section class="section simulator-teleoperation-section" id="simulator-teleoperation">
+<section class="section teleoperation-section" id="simulator-teleoperation">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">Teleoperation in the simulator</h2>
 
-    <div class="sim-task-tabs" role="tablist" aria-label="Simulator teleoperation tasks">
+    <div class="task-tabs sim-task-tabs" role="tablist" aria-label="Simulator teleoperation tasks">
       <button
-        class="sim-task-tab is-active"
+        class="task-tab sim-task-tab is-active"
         type="button"
         role="tab"
         aria-selected="true"
@@ -410,7 +467,7 @@ Policy for Dexterous Manipulation</h1>
       </button>
 
       <button
-        class="sim-task-tab"
+        class="task-tab sim-task-tab"
         type="button"
         role="tab"
         aria-selected="false"
@@ -420,7 +477,7 @@ Policy for Dexterous Manipulation</h1>
       </button>
 
       <button
-        class="sim-task-tab"
+        class="task-tab sim-task-tab"
         type="button"
         role="tab"
         aria-selected="false"
@@ -465,24 +522,60 @@ Policy for Dexterous Manipulation</h1>
 </section>
 <!-- End simulator teleoperation videos -->
 
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
+<!-- Real-world teleoperation videos -->
+<section class="section hero is-light teleoperation-section" id="realworld-teleoperation">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <!-- TODO: Replace with your paper abstract -->
-          <p>
-            Multi-finger dexterous manipulation relies on stable hand-object interactions, yet these interactions are partially observable in practice. Visual observations are often occluded by the hand, tactile sensors introduce hardware-specific modalities and calibration burdens, and existing policies rarely model how these cues evolve under actions, making them brittle under contact uncertainty. To address these, we present ProxiDex, a dynamics-guided proximity policy framework that treats hand-object proximity as an interaction state for dexterous manipulation. ProxiDex reconstructs interaction point clouds and converts geometric distances into proximity cues, forming a hardware-agnostic contact representation that provides immersive feedback during VR teleoperation. Built on this representation, ProxiDex learns action-conditioned proximity dynamics with a coupled forward–inverse design: future observation latents are predicted from actions, while proximity variations are decoded from latent changes. Leveraging these dynamics, ProxiDex adaptively reweights proximity tokens across manipulation phases and uses dynamics-consistency supervision to guide policy inference, stabilizing action generation under unreliable visual feedback. Simulation and real-world experiments demonstrate improved success rates and robustness over representative baselines across standard, unseen objects, and perturbation scenarios.
-          </p>
-        </div>
+    <h2 class="title is-3 has-text-centered">Teleoperation in the real-world</h2>
+
+    <div class="task-tabs real-task-tabs" role="tablist" aria-label="Real-world teleoperation tasks">
+      <button
+        class="task-tab real-task-tab is-active"
+        type="button"
+        role="tab"
+        aria-selected="true"
+        data-video="static/videos/RealTask1.mp4">
+        Task1: Pick
+      </button>
+
+      <button
+        class="task-tab real-task-tab"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        data-video="static/videos/RealTask2.mp4">
+        Task2: Pinch
+      </button>
+
+      <button
+        class="task-tab real-task-tab"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        data-video="static/videos/RealTask3.mp4">
+        Task3: Sweep
+      </button>
+    </div>
+
+    <div class="real-video-wrapper">
+      <div class="real-video-frame">
+        <video
+          id="real-video"
+          autoplay
+          controls
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-label="Real-world teleoperation video">
+          <source src="static/videos/RealTask1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
   </div>
 </section>
-<!-- End paper abstract -->
+<!-- End real-world teleoperation videos -->
+
 
 
 <!-- Image carousel -->
@@ -653,16 +746,15 @@ Policy for Dexterous Manipulation</h1>
   
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const taskTabs = document.querySelectorAll('.sim-task-tab');
-    const leftVideo = document.getElementById('sim-video-left');
-    const rightVideo = document.getElementById('sim-video-right');
-
-    if (!taskTabs.length || !leftVideo || !rightVideo) {
-      return;
-    }
-
     function replaceVideo(videoElement, videoPath) {
+      if (!videoElement || !videoPath) {
+        return;
+      }
+
       const sourceElement = videoElement.querySelector('source');
+      if (!sourceElement) {
+        return;
+      }
 
       videoElement.pause();
       sourceElement.src = videoPath;
@@ -676,20 +768,43 @@ Policy for Dexterous Manipulation</h1>
       }
     }
 
-    taskTabs.forEach(function (tab) {
+    function activateTab(clickedTab, allTabs) {
+      allTabs.forEach(function (tab) {
+        const isSelected = tab === clickedTab;
+        tab.classList.toggle('is-active', isSelected);
+        tab.setAttribute('aria-selected', String(isSelected));
+      });
+    }
+
+    // Simulator: switch the two side-by-side videos together.
+    const simulatorTabs = document.querySelectorAll('.sim-task-tab');
+    const leftSimulatorVideo = document.getElementById('sim-video-left');
+    const rightSimulatorVideo = document.getElementById('sim-video-right');
+
+    simulatorTabs.forEach(function (tab) {
       tab.addEventListener('click', function () {
         if (tab.classList.contains('is-active')) {
           return;
         }
 
-        taskTabs.forEach(function (item) {
-          const isSelected = item === tab;
-          item.classList.toggle('is-active', isSelected);
-          item.setAttribute('aria-selected', String(isSelected));
-        });
+        activateTab(tab, simulatorTabs);
+        replaceVideo(leftSimulatorVideo, tab.dataset.leftVideo);
+        replaceVideo(rightSimulatorVideo, tab.dataset.rightVideo);
+      });
+    });
 
-        replaceVideo(leftVideo, tab.dataset.leftVideo);
-        replaceVideo(rightVideo, tab.dataset.rightVideo);
+    // Real world: switch the single task video.
+    const realWorldTabs = document.querySelectorAll('.real-task-tab');
+    const realWorldVideo = document.getElementById('real-video');
+
+    realWorldTabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        if (tab.classList.contains('is-active')) {
+          return;
+        }
+
+        activateTab(tab, realWorldTabs);
+        replaceVideo(realWorldVideo, tab.dataset.video);
       });
     });
   });
