@@ -177,6 +177,92 @@
     ]
   }
   </script>
+
+  <!-- Simulator teleoperation task tabs -->
+  <style>
+    .simulator-teleoperation-section {
+      padding-top: 2.5rem;
+      padding-bottom: 3rem;
+    }
+
+    .sim-task-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin: 0 auto 1.5rem;
+      border-bottom: 1px solid #dbdbdb;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .sim-task-tab {
+      flex: 0 0 auto;
+      appearance: none;
+      background: transparent;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      color: #4a4a4a;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.25;
+      padding: 0.85rem 1.4rem;
+      white-space: nowrap;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .sim-task-tab:hover,
+    .sim-task-tab:focus-visible {
+      color: #3273dc;
+      outline: none;
+    }
+
+    .sim-task-tab.is-active {
+      color: #3273dc;
+      border-bottom-color: #3273dc;
+    }
+
+    .sim-video-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .sim-video-frame {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .sim-video-frame video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sim-task-tabs {
+        justify-content: flex-start;
+      }
+
+      .sim-task-tab {
+        font-size: 0.95rem;
+        padding: 0.75rem 1rem;
+      }
+
+      .sim-video-pair {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        background: transparent;
+      }
+    }
+  </style>
+
 </head>
 <body>
 
@@ -305,6 +391,80 @@ Policy for Dexterous Manipulation</h1>
   </div>
 </section>
 <!-- End teaser video -->
+
+
+<!-- Simulator teleoperation videos -->
+<section class="section simulator-teleoperation-section" id="simulator-teleoperation">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Teleoperation in the simulator</h2>
+
+    <div class="sim-task-tabs" role="tablist" aria-label="Simulator teleoperation tasks">
+      <button
+        class="sim-task-tab is-active"
+        type="button"
+        role="tab"
+        aria-selected="true"
+        data-left-video="static/videos/SimTask1_1.mp4"
+        data-right-video="static/videos/SimTask1_2.mp4">
+        Task1: Box
+      </button>
+
+      <button
+        class="sim-task-tab"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        data-left-video="static/videos/SimTask2_1.mp4"
+        data-right-video="static/videos/SimTask2_2.mp4">
+        Task2: Driller
+      </button>
+
+      <button
+        class="sim-task-tab"
+        type="button"
+        role="tab"
+        aria-selected="false"
+        data-left-video="static/videos/SimTask3_1.mp4"
+        data-right-video="static/videos/SimTask3_2.mp4">
+        Task3: Banana
+      </button>
+    </div>
+
+    <div class="sim-video-pair">
+      <div class="sim-video-frame">
+        <video
+          id="sim-video-left"
+          autoplay
+          controls
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-label="Left simulator teleoperation video">
+          <source src="static/videos/SimTask1_1.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <div class="sim-video-frame">
+        <video
+          id="sim-video-right"
+          autoplay
+          controls
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-label="Right simulator teleoperation video">
+          <source src="static/videos/SimTask1_2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End simulator teleoperation videos -->
+
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -489,6 +649,52 @@ Policy for Dexterous Manipulation</h1>
 <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
     <!-- End of Statcounter Code -->
+
+  
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const taskTabs = document.querySelectorAll('.sim-task-tab');
+    const leftVideo = document.getElementById('sim-video-left');
+    const rightVideo = document.getElementById('sim-video-right');
+
+    if (!taskTabs.length || !leftVideo || !rightVideo) {
+      return;
+    }
+
+    function replaceVideo(videoElement, videoPath) {
+      const sourceElement = videoElement.querySelector('source');
+
+      videoElement.pause();
+      sourceElement.src = videoPath;
+      videoElement.load();
+
+      const playPromise = videoElement.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function () {
+          // Autoplay may be blocked by the browser; controls remain available.
+        });
+      }
+    }
+
+    taskTabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        if (tab.classList.contains('is-active')) {
+          return;
+        }
+
+        taskTabs.forEach(function (item) {
+          const isSelected = item === tab;
+          item.classList.toggle('is-active', isSelected);
+          item.setAttribute('aria-selected', String(isSelected));
+        });
+
+        replaceVideo(leftVideo, tab.dataset.leftVideo);
+        replaceVideo(rightVideo, tab.dataset.rightVideo);
+      });
+    });
+  });
+</script>
+
 
   </body>
   </html>
