@@ -259,6 +259,166 @@
       background: #000;
     }
 
+    /* Pipeline illustration carousel */
+    .pipeline-section {
+      padding-top: 2.75rem;
+      padding-bottom: 3.25rem;
+    }
+
+    .pipeline-carousel {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .pipeline-tabs {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      border-bottom: 1px solid #dbdbdb;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .pipeline-tab {
+      flex: 0 0 auto;
+      appearance: none;
+      background: transparent;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      color: #4a4a4a;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.25;
+      padding: 0.85rem 1.5rem;
+      white-space: nowrap;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .pipeline-tab:hover,
+    .pipeline-tab:focus-visible {
+      color: #3273dc;
+      outline: none;
+    }
+
+    .pipeline-tab.is-active {
+      color: #3273dc;
+      border-bottom-color: #3273dc;
+    }
+
+    .pipeline-viewport {
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .pipeline-track {
+      display: flex;
+      align-items: stretch;
+      transition: transform 0.65s ease-in-out;
+      will-change: transform;
+    }
+
+    .pipeline-slide {
+      flex: 0 0 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 0 0.35rem;
+    }
+
+    .pipeline-image-frame {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 450px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .pipeline-image-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .pipeline-slide-title {
+      margin-top: 1.25rem;
+      margin-bottom: 0.65rem !important;
+      text-align: center;
+    }
+
+    .pipeline-description {
+      max-width: 880px;
+      margin: 0 auto;
+      color: #4a4a4a;
+      font-size: 1rem;
+      line-height: 1.65;
+      text-align: justify;
+    }
+
+    .pipeline-arrow {
+      position: absolute;
+      top: 250px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 3px 12px rgba(10, 10, 10, 0.18);
+      color: #363636;
+      cursor: pointer;
+      font-size: 1.15rem;
+      transform: translateY(-50%);
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .pipeline-arrow:hover,
+    .pipeline-arrow:focus-visible {
+      background: #3273dc;
+      color: #fff;
+      outline: none;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .pipeline-arrow.is-previous {
+      left: -1rem;
+    }
+
+    .pipeline-arrow.is-next {
+      right: -1rem;
+    }
+
+    .pipeline-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.55rem;
+      margin-top: 1.35rem;
+    }
+
+    .pipeline-dot {
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #b5b5b5;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .pipeline-dot.is-active {
+      background: #3273dc;
+      transform: scale(1.25);
+    }
+
     @media screen and (max-width: 1024px) {
       .publication-title-two-lines {
         font-size: 2.45rem !important;
@@ -291,6 +451,44 @@
 
       .real-video-frame {
         aspect-ratio: 4 / 3;
+      }
+
+      .pipeline-tabs {
+        justify-content: flex-start;
+      }
+
+      .pipeline-tab {
+        font-size: 0.95rem;
+        padding: 0.75rem 1rem;
+      }
+
+      .pipeline-image-frame {
+        height: 260px;
+      }
+
+      .pipeline-description {
+        font-size: 0.95rem;
+        text-align: left;
+      }
+
+      .pipeline-arrow {
+        top: 165px;
+        width: 36px;
+        height: 36px;
+      }
+
+      .pipeline-arrow.is-previous {
+        left: 0.5rem;
+      }
+
+      .pipeline-arrow.is-next {
+        right: 0.5rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pipeline-track {
+        transition: none;
       }
     }
   </style>
@@ -397,6 +595,75 @@
 </section>
 <!-- End paper abstract -->
 
+<!-- Pipeline illustration carousel -->
+<section class="section pipeline-section" id="pipeline-illustration">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Pipeline illustration</h2>
+
+    <div class="pipeline-carousel" aria-roledescription="carousel" aria-label="ProxiDex pipeline illustrations">
+      <div class="pipeline-tabs" role="tablist" aria-label="Pipeline stages">
+        <button class="pipeline-tab is-active" type="button" role="tab" aria-selected="true" data-pipeline-index="0">
+          Teleoperation
+        </button>
+        <button class="pipeline-tab" type="button" role="tab" aria-selected="false" data-pipeline-index="1">
+          Method
+        </button>
+        <button class="pipeline-tab" type="button" role="tab" aria-selected="false" data-pipeline-index="2">
+          Inference
+        </button>
+      </div>
+
+      <div class="pipeline-viewport">
+        <div class="pipeline-track" id="pipeline-track">
+          <article class="pipeline-slide" aria-hidden="false">
+            <div class="pipeline-image-frame">
+              <img src="static/images/fig6.png" alt="VR teleoperation pipeline in ProxiDex" loading="eager">
+            </div>
+            <h3 class="title is-4 pipeline-slide-title">Teleoperation</h3>
+            <p class="pipeline-description">
+              VR teleoperation pipeline in ProxiDex, where OpenXR hand keypoints and wrist poses are streamed to a workstation for hand–arm control, and the reconstructed hand–object interaction point cloud is sent back to the headset as optional proximity feedback for immersive teleoperation.
+            </p>
+          </article>
+
+          <article class="pipeline-slide" aria-hidden="true">
+            <div class="pipeline-image-frame">
+              <img src="static/images/fig2.png" alt="ProxiDex method overview" loading="lazy">
+            </div>
+            <h3 class="title is-4 pipeline-slide-title">Method</h3>
+            <p class="pipeline-description">
+              The method proceeds in three stages: (a) interaction-aware data acquisition, which reconstructs hand–object interaction point clouds from manipulation images and robot states; (b) latent interaction dynamics modeling, which extracts region-level proximity cues and learns action-conditioned proximity evolution; and (c) trajectory-adaptive policy inference, which incorporates these cues into a diffusion policy to reweight proximity tokens across manipulation phases.
+            </p>
+          </article>
+
+          <article class="pipeline-slide" aria-hidden="true">
+            <div class="pipeline-image-frame">
+              <img src="static/images/fig3.png" alt="Policy inference pipeline with dynamics consistency guidance" loading="lazy">
+            </div>
+            <h3 class="title is-4 pipeline-slide-title">Inference</h3>
+            <p class="pipeline-description">
+              Overview of the Policy Inference Pipeline with Dynamics Consistency Guidance.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <button class="pipeline-arrow is-previous" type="button" aria-label="Show previous pipeline illustration">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+      </button>
+      <button class="pipeline-arrow is-next" type="button" aria-label="Show next pipeline illustration">
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+
+      <div class="pipeline-dots" aria-label="Choose pipeline illustration">
+        <button class="pipeline-dot is-active" type="button" aria-label="Show Teleoperation illustration" aria-current="true" data-pipeline-index="0"></button>
+        <button class="pipeline-dot" type="button" aria-label="Show Method illustration" aria-current="false" data-pipeline-index="1"></button>
+        <button class="pipeline-dot" type="button" aria-label="Show Inference illustration" aria-current="false" data-pipeline-index="2"></button>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End pipeline illustration carousel -->
+
 <!-- Simulator teleoperation videos -->
 <section class="section teleoperation-section" id="simulator-teleoperation">
   <div class="container is-max-desktop">
@@ -480,7 +747,7 @@
         type="button"
         role="tab"
         aria-selected="true"
-        data-video="static/videos/Realtask1.mp4">
+        data-video="static/videos/RealTask1.mp4">
         Task1: Pick
       </button>
 
@@ -489,7 +756,7 @@
         type="button"
         role="tab"
         aria-selected="false"
-        data-video="static/videos/Realtask2.mp4">
+        data-video="static/videos/RealTask2.mp4">
         Task2: Pinch
       </button>
 
@@ -498,7 +765,7 @@
         type="button"
         role="tab"
         aria-selected="false"
-        data-video="static/videos/Realtask3.mp4">
+        data-video="static/videos/RealTask3.mp4">
         Task3: Sweep
       </button>
     </div>
@@ -524,46 +791,6 @@
 <!-- End real-world teleoperation videos -->
 
 
-
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-<!-- End image carousel -->
 
 
 
@@ -754,6 +981,116 @@
         replaceVideo(realWorldVideo, tab.dataset.video);
       });
     });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const carousel = document.querySelector('.pipeline-carousel');
+    const track = document.getElementById('pipeline-track');
+
+    if (!carousel || !track) {
+      return;
+    }
+
+    const slides = Array.from(track.querySelectorAll('.pipeline-slide'));
+    const tabs = Array.from(carousel.querySelectorAll('.pipeline-tab'));
+    const dots = Array.from(carousel.querySelectorAll('.pipeline-dot'));
+    const previousButton = carousel.querySelector('.pipeline-arrow.is-previous');
+    const nextButton = carousel.querySelector('.pipeline-arrow.is-next');
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    let currentIndex = 0;
+    let autoplayTimer = null;
+    const autoplayDelay = 5000;
+
+    function showSlide(index, restartAutoplay) {
+      currentIndex = (index + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+
+      slides.forEach(function (slide, slideIndex) {
+        slide.setAttribute('aria-hidden', String(slideIndex !== currentIndex));
+      });
+
+      tabs.forEach(function (tab, tabIndex) {
+        const isActive = tabIndex === currentIndex;
+        tab.classList.toggle('is-active', isActive);
+        tab.setAttribute('aria-selected', String(isActive));
+      });
+
+      dots.forEach(function (dot, dotIndex) {
+        const isActive = dotIndex === currentIndex;
+        dot.classList.toggle('is-active', isActive);
+        dot.setAttribute('aria-current', String(isActive));
+      });
+
+      if (restartAutoplay) {
+        startAutoplay();
+      }
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer !== null) {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+
+      if (reducedMotionQuery.matches || document.hidden) {
+        return;
+      }
+
+      autoplayTimer = window.setInterval(function () {
+        showSlide(currentIndex + 1, false);
+      }, autoplayDelay);
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        showSlide(Number(tab.dataset.pipelineIndex), true);
+      });
+    });
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        showSlide(Number(dot.dataset.pipelineIndex), true);
+      });
+    });
+
+    previousButton.addEventListener('click', function () {
+      showSlide(currentIndex - 1, true);
+    });
+
+    nextButton.addEventListener('click', function () {
+      showSlide(currentIndex + 1, true);
+    });
+
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('focusin', stopAutoplay);
+    carousel.addEventListener('focusout', function (event) {
+      if (!carousel.contains(event.relatedTarget)) {
+        startAutoplay();
+      }
+    });
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+
+    if (typeof reducedMotionQuery.addEventListener === 'function') {
+      reducedMotionQuery.addEventListener('change', startAutoplay);
+    }
+
+    showSlide(0, false);
+    startAutoplay();
   });
 </script>
 
