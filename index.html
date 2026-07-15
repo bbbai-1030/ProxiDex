@@ -196,7 +196,7 @@
     }
 
     .teleoperation-subsection {
-      max-width: 960px;
+      max-width: 1120px;
       margin: 0 auto;
     }
 
@@ -207,80 +207,59 @@
     }
 
     .teleoperation-subtitle {
-      margin-bottom: 1.1rem !important;
+      margin-bottom: 1.5rem !important;
     }
 
-    .task-tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      margin: 0 auto 1.5rem;
-      border-bottom: 1px solid #dbdbdb;
-      overflow-x: auto;
-      scrollbar-width: thin;
+    /* Shared task-column layout for teleoperation and point-cloud videos. */
+    .task-video-columns {
+      display: grid;
+      gap: 1rem;
+      width: 100%;
     }
 
-    .task-tab {
-      flex: 0 0 auto;
-      appearance: none;
-      background: transparent;
-      border: 0;
-      border-bottom: 3px solid transparent;
-      color: #4a4a4a;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 1.05rem;
-      font-weight: 600;
-      line-height: 1.25;
-      padding: 0.85rem 1.4rem;
-      white-space: nowrap;
-      transition: color 0.2s ease, border-color 0.2s ease;
+    .task-video-columns.is-three-columns {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    .task-tab:hover,
-    .task-tab:focus-visible {
-      color: #3273dc;
-      outline: none;
+    .task-video-columns.is-four-columns {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    .task-tab.is-active {
-      color: #3273dc;
-      border-bottom-color: #3273dc;
+    .task-video-column {
+      min-width: 0;
     }
 
-    .sim-video-pair {
-      display: flex;
-      justify-content: center;
-      overflow: hidden;
-      background: #000;
+    .task-video-label {
+      margin-bottom: 0.75rem !important;
+      color: #363636;
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-align: center;
     }
 
-    .sim-video-frame {
+    .task-video-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .task-video-frame {
+      position: relative;
       width: 100%;
       aspect-ratio: 4 / 3;
       overflow: hidden;
+      border-radius: 8px;
       background: #000;
+      box-shadow: 0 2px 10px rgba(10, 10, 10, 0.12);
     }
 
-    .sim-video-frame video,
-    .real-video-frame video {
+    .task-video-frame video {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: contain;
       background: #000;
-    }
-
-    .real-video-wrapper {
-      display: flex;
-      justify-content: center;
-    }
-
-    .real-video-frame {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
-      background: #000;
+      transform: translateZ(0);
+      backface-visibility: hidden;
     }
 
     /* Pipeline illustration carousel */
@@ -446,11 +425,6 @@
 
 
     /* Video loading and error feedback */
-    .sim-video-pair,
-    .real-video-frame {
-      position: relative;
-    }
-
     .video-status-overlay {
       position: absolute;
       inset: 0;
@@ -476,12 +450,6 @@
       pointer-events: auto;
     }
 
-    .sim-video-frame video,
-    .real-video-frame video {
-      transform: translateZ(0);
-      backface-visibility: hidden;
-    }
-
     @media screen and (max-width: 1024px) {
       .publication-title-two-lines {
         font-size: 2.45rem !important;
@@ -497,18 +465,6 @@
         font-size: 2rem !important;
       }
 
-      .task-tabs {
-        justify-content: flex-start;
-      }
-
-      .task-tab {
-        font-size: 0.95rem;
-        padding: 0.75rem 1rem;
-      }
-
-      .real-video-frame {
-        aspect-ratio: 4 / 3;
-      }
 
       .pipeline-tabs {
         justify-content: flex-start;
@@ -549,7 +505,7 @@
       }
     }
 
-    /* Interaction point cloud visualization benchmark grids */
+    /* Interaction point cloud visualization task columns */
     .interaction-pointcloud-section {
       padding-top: 3rem;
       padding-bottom: 3.75rem;
@@ -574,43 +530,9 @@
       margin-bottom: 1.5rem !important;
     }
 
-    .benchmark-video-grid {
-      display: grid;
-      gap: 1rem;
-      width: 100%;
-    }
-
-    .benchmark-video-grid.is-three-columns {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .benchmark-video-grid.is-four-columns {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .benchmark-video-frame {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      border-radius: 8px;
-      background: #000;
-      box-shadow: 0 2px 10px rgba(10, 10, 10, 0.12);
-    }
-
-    .benchmark-video-frame video {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      background: #000;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-    }
-
     @media screen and (max-width: 1024px) {
-      .benchmark-video-grid.is-three-columns,
-      .benchmark-video-grid.is-four-columns {
+      .task-video-columns.is-three-columns,
+      .task-video-columns.is-four-columns {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -620,13 +542,9 @@
         font-size: 2rem !important;
       }
 
-      .benchmark-video-grid.is-three-columns,
-      .benchmark-video-grid.is-four-columns {
+      .task-video-columns.is-three-columns,
+      .task-video-columns.is-four-columns {
         grid-template-columns: 1fr;
-      }
-
-      .benchmark-video-frame {
-        aspect-ratio: 4 / 3;
       }
     }
 
@@ -805,57 +723,49 @@
 
 <!-- Teleoperation videos -->
 <section class="section teleoperation-group-section" id="teleoperation">
-  <div class="container is-max-desktop">
+  <div class="container is-widescreen">
     <h2 class="title is-2 has-text-centered teleoperation-group-title">Teleoperation</h2>
 
     <!-- Simulator teleoperation -->
     <div class="teleoperation-subsection" id="simulator-teleoperation">
       <h3 class="title is-3 has-text-centered teleoperation-subtitle">Teleoperation in the simulator</h3>
 
-      <div class="task-tabs sim-task-tabs" role="tablist" aria-label="Simulator teleoperation tasks">
-        <button
-          class="task-tab sim-task-tab is-active"
-          type="button"
-          role="tab"
-          aria-selected="true"
-          data-video="static/videos/SimTask1_1.mp4">
-          Box
-        </button>
+      <div class="task-video-columns is-three-columns">
+        <article class="task-video-column">
+          <h4 class="task-video-label">Box</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="teleoperation-grid-video" controls muted loop playsinline preload="metadata" aria-label="Simulator teleoperation: Box">
+                <source src="static/videos/SimTask1_1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
 
-        <button
-          class="task-tab sim-task-tab"
-          type="button"
-          role="tab"
-          aria-selected="false"
-          data-video="static/videos/SimTask2_1.mp4">
-          Driller
-        </button>
+        <article class="task-video-column">
+          <h4 class="task-video-label">Driller</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="teleoperation-grid-video" controls muted loop playsinline preload="metadata" aria-label="Simulator teleoperation: Driller">
+                <source src="static/videos/SimTask2_1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
 
-        <button
-          class="task-tab sim-task-tab"
-          type="button"
-          role="tab"
-          aria-selected="false"
-          data-video="static/videos/SimTask3_1.mp4">
-          Banana
-        </button>
-      </div>
-
-      <div class="sim-video-pair">
-        <div class="sim-video-frame">
-          <video
-            id="sim-video"
-            class="viewport-autoplay-video"
-            controls
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            aria-label="Simulator teleoperation video">
-            <source src="static/videos/SimTask1_1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
+        <article class="task-video-column">
+          <h4 class="task-video-label">Banana</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="teleoperation-grid-video" controls muted loop playsinline preload="metadata" aria-label="Simulator teleoperation: Banana">
+                <source src="static/videos/SimTask3_1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
     <!-- End simulator teleoperation -->
@@ -864,51 +774,42 @@
     <div class="teleoperation-subsection" id="realworld-teleoperation">
       <h3 class="title is-3 has-text-centered teleoperation-subtitle">Teleoperation in the real-world</h3>
 
-      <div class="task-tabs real-task-tabs" role="tablist" aria-label="Real-world teleoperation tasks">
-        <button
-          class="task-tab real-task-tab is-active"
-          type="button"
-          role="tab"
-          aria-selected="true"
-          data-video="static/videos/Realtask1.mp4">
-          Pick
-        </button>
+      <div class="task-video-columns is-three-columns">
+        <article class="task-video-column">
+          <h4 class="task-video-label">Pick</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="teleoperation-grid-video" controls muted loop playsinline preload="metadata" aria-label="Real-world teleoperation: Pick">
+                <source src="static/videos/Realtask1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
 
-        <button
-          class="task-tab real-task-tab"
-          type="button"
-          role="tab"
-          aria-selected="false"
-          data-video="static/videos/Realtask2.mp4">
-          Pinch
-        </button>
+        <article class="task-video-column">
+          <h4 class="task-video-label">Pinch</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="teleoperation-grid-video" controls muted loop playsinline preload="metadata" aria-label="Real-world teleoperation: Pinch">
+                <source src="static/videos/Realtask2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
 
-        <button
-          class="task-tab real-task-tab"
-          type="button"
-          role="tab"
-          aria-selected="false"
-          data-video="static/videos/Realtask3.mp4">
-          Sweep
-        </button>
-      </div>
-
-      <div class="real-video-wrapper">
-        <div class="real-video-frame">
-<video
-            id="real-video"
-            class="viewport-autoplay-video"
-            data-autoplay-when-visible="true"
-            controls
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            aria-label="Real-world teleoperation video">
-            <source src="static/videos/Realtask1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
+        <article class="task-video-column">
+          <h4 class="task-video-label">Sweep</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="teleoperation-grid-video" controls muted loop playsinline preload="metadata" aria-label="Real-world teleoperation: Sweep">
+                <source src="static/videos/Realtask3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
     <!-- End real-world teleoperation -->
@@ -926,43 +827,60 @@
     <!-- Adroit -->
     <div class="benchmark-visualization-group" id="adroit-visualization">
       <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Adroit</h3>
-      <div class="benchmark-video-grid is-three-columns">
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit benchmark 1">
-            <source data-src="static/videos/benchmark1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit benchmark 2">
-            <source data-src="static/videos/benchmark2.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit benchmark 3">
-            <source data-src="static/videos/benchmark3.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit benchmark 1 alternative view">
-            <source data-src="static/videos/benchmark1-1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit benchmark 2 alternative view">
-            <source data-src="static/videos/benchmark2-1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit benchmark 3 alternative view">
-            <source data-src="static/videos/benchmark3-1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      <div class="task-video-columns is-three-columns">
+        <article class="task-video-column">
+          <h4 class="task-video-label">Door</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit visualization: Door, view 1">
+                <source data-src="static/videos/benchmark1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit visualization: Door, view 2">
+                <source data-src="static/videos/benchmark1-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="task-video-column">
+          <h4 class="task-video-label">Hammer</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit visualization: Hammer, view 1">
+                <source data-src="static/videos/benchmark2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit visualization: Hammer, view 2">
+                <source data-src="static/videos/benchmark2-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="task-video-column">
+          <h4 class="task-video-label">Pen</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit visualization: Pen, view 1">
+                <source data-src="static/videos/benchmark3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Adroit visualization: Pen, view 2">
+                <source data-src="static/videos/benchmark3-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
     <!-- End Adroit -->
@@ -970,99 +888,200 @@
     <!-- DexArt -->
     <div class="benchmark-visualization-group" id="dexart-visualization">
       <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">DexArt</h3>
-      <div class="benchmark-video-grid is-four-columns">
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt benchmark 4">
-            <source data-src="static/videos/benchmark4.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt benchmark 5">
-            <source data-src="static/videos/benchmark5.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt benchmark 6">
-            <source data-src="static/videos/benchmark6.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt benchmark 7">
-            <source data-src="static/videos/benchmark7.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt benchmark 4 alternative view">
-            <source data-src="static/videos/benchmark4-1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt benchmark 5 alternative view">
-            <source data-src="static/videos/benchmark5-1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt benchmark 6 alternative view">
-            <source data-src="static/videos/benchmark6-1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt benchmark 7 alternative view">
-            <source data-src="static/videos/benchmark7-1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      <div class="task-video-columns is-four-columns">
+        <article class="task-video-column">
+          <h4 class="task-video-label">Bucket</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt visualization: Bucket, view 1">
+                <source data-src="static/videos/benchmark4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt visualization: Bucket, view 2">
+                <source data-src="static/videos/benchmark4-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="task-video-column">
+          <h4 class="task-video-label">Faucet</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt visualization: Faucet, view 1">
+                <source data-src="static/videos/benchmark5.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt visualization: Faucet, view 2">
+                <source data-src="static/videos/benchmark5-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="task-video-column">
+          <h4 class="task-video-label">Laptop</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt visualization: Laptop, view 1">
+                <source data-src="static/videos/benchmark6.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt visualization: Laptop, view 2">
+                <source data-src="static/videos/benchmark6-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="task-video-column">
+          <h4 class="task-video-label">Toilet</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt visualization: Toilet, view 1">
+                <source data-src="static/videos/benchmark7.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="DexArt visualization: Toilet, view 2">
+                <source data-src="static/videos/benchmark7-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
     <!-- End DexArt -->
 
+    <!-- Self-Design -->
+    <div class="benchmark-visualization-group" id="self-design-visualization">
+      <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Self-Design</h3>
+      <div class="task-video-columns is-three-columns">
+        <article class="task-video-column">
+          <h4 class="task-video-label">Box</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Self-Design visualization: Box, view 1">
+                <source data-src="static/videos/benchmark8.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Self-Design visualization: Box, view 2">
+                <source data-src="static/videos/benchmark8-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="task-video-column">
+          <h4 class="task-video-label">Driller</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Self-Design visualization: Driller, view 1">
+                <source data-src="static/videos/benchmark9.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Self-Design visualization: Driller, view 2">
+                <source data-src="static/videos/benchmark9-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="task-video-column">
+          <h4 class="task-video-label">Banana</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Self-Design visualization: Banana, view 1">
+                <source data-src="static/videos/benchmark10.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Self-Design visualization: Banana, view 2">
+                <source data-src="static/videos/benchmark10-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <!-- End Self-Design -->
+
     <!-- Real-World -->
-    <div class="benchmark-visualization-group" id="realworld-pointcloud-visualization">
+    <div class="benchmark-visualization-group" id="real-world-visualization">
       <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Real-World</h3>
-      <div class="benchmark-video-grid is-three-columns">
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-world benchmark 8">
-            <source data-src="static/videos/benchmark8.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-world benchmark 9">
-            <source data-src="static/videos/benchmark9.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-world benchmark 10">
-            <source data-src="static/videos/benchmark10.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-world benchmark 8 alternative view">
-            <source data-src="static/videos/benchmark8-1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-world benchmark 9 alternative view">
-            <source data-src="static/videos/benchmark9-1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-        <div class="benchmark-video-frame">
-          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-world benchmark 10 alternative view">
-            <source data-src="static/videos/benchmark10-1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
+      <div class="task-video-columns is-three-columns">
+        <article class="task-video-column">
+          <h4 class="task-video-label">Pick</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-World visualization: Pick, view 1">
+                <source data-src="static/videos/Rtask1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-World visualization: Pick, view 2">
+                <source data-src="static/videos/Rtask1-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="task-video-column">
+          <h4 class="task-video-label">Pinch</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-World visualization: Pinch, view 1">
+                <source data-src="static/videos/Rtask2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-World visualization: Pinch, view 2">
+                <source data-src="static/videos/Rtask2-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
+
+        <article class="task-video-column">
+          <h4 class="task-video-label">Sweep</h4>
+          <div class="task-video-stack">
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-World visualization: Sweep, view 1">
+                <source data-src="static/videos/Rtask3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="task-video-frame">
+              <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Real-World visualization: Sweep, view 2">
+                <source data-src="static/videos/Rtask3-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
     <!-- End Real-World -->
@@ -1201,96 +1220,43 @@
   
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const simulatorTabs = Array.from(document.querySelectorAll('.sim-task-tab'));
-    const realWorldTabs = Array.from(document.querySelectorAll('.real-task-tab'));
-    const simulatorVideo = document.getElementById('sim-video');
-    const realWorldVideo = document.getElementById('real-video');
     const teaserVideo = document.getElementById('tree');
+    const teleoperationVideos = Array.from(document.querySelectorAll('.teleoperation-grid-video'));
+    const autoplayVideos = [teaserVideo].concat(teleoperationVideos).filter(Boolean);
 
-    function activateTab(clickedTab, allTabs) {
-      allTabs.forEach(function (tab) {
-        const selected = tab === clickedTab;
-        tab.classList.toggle('is-active', selected);
-        tab.setAttribute('aria-selected', String(selected));
-      });
-    }
-
-    function replaceVideo(videoElement, videoPath) {
-      if (!videoElement || !videoPath) {
-        return;
-      }
-
-      const sourceElement = videoElement.querySelector('source');
-      if (!sourceElement) {
-        return;
-      }
-
-      videoElement.pause();
-      sourceElement.src = videoPath;
-      videoElement.preload = 'auto';
-      videoElement.load();
-
-      const playPromise = videoElement.play();
-      if (playPromise && typeof playPromise.catch === 'function') {
-        playPromise.catch(function () {
-          // Native controls remain available when autoplay is blocked.
-        });
-      }
-    }
-
-    simulatorTabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        if (tab.classList.contains('is-active')) {
-          return;
-        }
-        activateTab(tab, simulatorTabs);
-        replaceVideo(simulatorVideo, tab.dataset.video);
-      });
-    });
-
-    realWorldTabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        if (tab.classList.contains('is-active')) {
-          return;
-        }
-        activateTab(tab, realWorldTabs);
-        replaceVideo(realWorldVideo, tab.dataset.video);
-      });
-    });
-
-    // Only play videos that are currently visible. This prevents hidden videos
-    // from consuming bandwidth and decoding resources in the background.
+    // Play only videos that are meaningfully visible and pause them immediately
+    // after they leave the viewport, limiting simultaneous decoding and bandwidth use.
     if ('IntersectionObserver' in window) {
       const videoObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           const video = entry.target;
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.2 && !document.hidden) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.35 && !document.hidden) {
             video.preload = 'auto';
             const playPromise = video.play();
             if (playPromise && typeof playPromise.catch === 'function') {
-              playPromise.catch(function () {});
+              playPromise.catch(function () {
+                // Native controls remain available when autoplay is blocked.
+              });
             }
           } else {
             video.pause();
           }
         });
-      }, { threshold: [0, 0.2] });
+      }, { threshold: [0, 0.35] });
 
-      [teaserVideo, simulatorVideo, realWorldVideo].forEach(function (video) {
-        if (video) {
-          videoObserver.observe(video);
-        }
+      autoplayVideos.forEach(function (video) {
+        videoObserver.observe(video);
       });
     }
 
     document.addEventListener('visibilitychange', function () {
-      if (document.hidden) {
-        [teaserVideo, simulatorVideo, realWorldVideo].forEach(function (video) {
-          if (video) {
-            video.pause();
-          }
-        });
+      if (!document.hidden) {
+        return;
       }
+
+      autoplayVideos.forEach(function (video) {
+        video.pause();
+      });
     });
   });
 </script>
