@@ -649,6 +649,83 @@
       text-align: center;
     }
 
+
+    /* Performance in Domination video grid */
+    .domination-results-block {
+      max-width: 1400px;
+      margin: 4rem auto 0;
+      padding-top: 3.25rem;
+      border-top: 1px solid #d5d5d5;
+    }
+
+    .domination-results-title {
+      margin-bottom: 1.75rem !important;
+    }
+
+    .domination-grid-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      padding: 0.2rem 0 0.7rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .domination-grid {
+      display: grid;
+      gap: 1.15rem;
+      min-width: 1180px;
+    }
+
+    .domination-row {
+      display: grid;
+      grid-template-columns: 105px repeat(5, minmax(0, 1fr));
+      gap: 0.85rem;
+      align-items: center;
+    }
+
+    .domination-task-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: stretch;
+      min-height: 120px;
+      margin: 0;
+      padding: 0.75rem;
+      border-radius: 8px;
+      background: #ededed;
+      color: #2f2f2f;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .domination-video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #000;
+      box-shadow: 0 2px 10px rgba(10, 10, 10, 0.12);
+    }
+
+    .domination-video-frame video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #000;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+
+    .domination-scroll-hint {
+      display: none;
+      margin-top: 0.45rem;
+      color: #7a7a7a;
+      font-size: 0.82rem;
+      text-align: center;
+    }
+
     @media screen and (max-width: 1024px) {
       .task-video-columns.is-three-columns,
       .task-video-columns.is-four-columns {
@@ -662,7 +739,8 @@
         font-size: 2rem !important;
       }
 
-      .simulation-results-title {
+      .simulation-results-title,
+      .domination-results-title {
         font-size: 1.55rem !important;
       }
 
@@ -672,7 +750,8 @@
         text-align: left;
       }
 
-      .results-scroll-hint {
+      .results-scroll-hint,
+      .domination-scroll-hint {
         display: block;
       }
 
@@ -789,7 +868,7 @@
 <!-- Pipeline illustration carousel -->
 <section class="section pipeline-section" id="pipeline-illustration">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Pipeline illustration</h2>
+    <h2 class="title is-3 has-text-centered">1. Framework</h2>
 
     <div class="pipeline-carousel" aria-roledescription="carousel" aria-label="ProxiDex pipeline illustrations">
       <div class="pipeline-tabs" role="tablist" aria-label="Pipeline stages">
@@ -858,7 +937,7 @@
 <!-- Teleoperation videos -->
 <section class="section teleoperation-group-section" id="teleoperation">
   <div class="container is-widescreen">
-    <h2 class="title is-2 has-text-centered teleoperation-group-title">Teleoperation</h2>
+    <h2 class="title is-2 has-text-centered teleoperation-group-title">2. Teleoperation</h2>
 
     <!-- Simulator teleoperation -->
     <div class="teleoperation-subsection" id="simulator-teleoperation">
@@ -882,7 +961,7 @@
           <div class="task-video-stack">
             <div class="task-video-frame">
               <video class="teleoperation-grid-video benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Simulator teleoperation: Driller">
-                <source data-src="static/videos/SimTask2-1.mp4" type="video/mp4">
+                <source data-src="static/videos/SimTask2_1.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -955,12 +1034,12 @@
 <section class="section interaction-pointcloud-section" id="interaction-pointcloud-visualization">
   <div class="container is-widescreen">
     <h2 class="title is-2 has-text-centered interaction-pointcloud-title">
-      Interaction Point Cloud Visualization
+      3. Interaction Point Cloud Visualization
     </h2>
 
     <!-- Adroit -->
     <div class="benchmark-visualization-group" id="adroit-visualization">
-      <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Adroit</h3>
+      <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Benchmark: Adroit</h3>
       <div class="task-video-columns is-three-columns">
         <article class="task-video-column">
           <h4 class="task-video-label">Door</h4>
@@ -1021,7 +1100,7 @@
 
     <!-- DexArt -->
     <div class="benchmark-visualization-group" id="dexart-visualization">
-      <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">DexArt</h3>
+      <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Benchmark: DexArt</h3>
       <div class="task-video-columns is-four-columns">
         <article class="task-video-column">
           <h4 class="task-video-label">Bucket</h4>
@@ -1100,7 +1179,7 @@
 
     <!-- Self-Design -->
     <div class="benchmark-visualization-group" id="self-design-visualization">
-      <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Self-Design</h3>
+      <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Self-Design Tasks in IsaacLab</h3>
       <div class="task-video-columns is-three-columns">
         <article class="task-video-column">
           <h4 class="task-video-label">Box</h4>
@@ -1227,7 +1306,7 @@
 <!-- Quantitative results -->
 <section class="section results-section" id="results">
   <div class="container is-widescreen">
-    <h2 class="title is-2 has-text-centered results-main-title">Result</h2>
+    <h2 class="title is-2 has-text-centered results-main-title">4. Results</h2>
 
     <div class="simulation-results-block" id="simulation-results">
       <h3 class="title is-3 has-text-centered simulation-results-title">Results in Simulation</h3>
@@ -1337,6 +1416,115 @@
         </table>
       </div>
       <p class="results-scroll-hint" aria-hidden="true">Swipe horizontally to view the complete table.</p>
+    </div>
+
+    <div class="domination-results-block" id="performance-in-domination">
+      <h3 class="title is-3 has-text-centered domination-results-title">Performance in Domination</h3>
+
+      <div class="domination-grid-wrapper" role="region" aria-label="Performance in Domination videos" tabindex="0">
+        <div class="domination-grid">
+      <div class="domination-row">
+        <h4 class="domination-task-label">Pick</h4>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Pick domination performance, trial 1">
+            <source data-src="static/videos1/IDtask1-1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Pick domination performance, trial 2">
+            <source data-src="static/videos1/IDtask1-2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Pick domination performance, trial 3">
+            <source data-src="static/videos1/IDtask1-3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Pick domination performance, trial 4">
+            <source data-src="static/videos1/IDtask1-4.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Pick domination performance, trial 5">
+            <source data-src="static/videos1/IDtask1-5.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      <div class="domination-row">
+        <h4 class="domination-task-label">Pinch</h4>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Pinch domination performance, trial 1">
+            <source data-src="static/videos1/IDtask2-1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Pinch domination performance, trial 2">
+            <source data-src="static/videos1/IDtask2-2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Pinch domination performance, trial 3">
+            <source data-src="static/videos1/IDtask2-3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Pinch domination performance, trial 4">
+            <source data-src="static/videos1/IDtask2-4.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Pinch domination performance, trial 5">
+            <source data-src="static/videos1/IDtask2-5.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      <div class="domination-row">
+        <h4 class="domination-task-label">Sweep</h4>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Sweep domination performance, trial 1">
+            <source data-src="static/videos1/IDtask3-1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Sweep domination performance, trial 2">
+            <source data-src="static/videos1/IDtask3-2.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Sweep domination performance, trial 3">
+            <source data-src="static/videos1/IDtask3-3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Sweep domination performance, trial 4">
+            <source data-src="static/videos1/IDtask3-4.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+        <div class="domination-video-frame">
+          <video class="benchmark-lazy-video" controls muted loop playsinline preload="none" aria-label="Sweep domination performance, trial 5">
+            <source data-src="static/videos1/IDtask3-5.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+        </div>
+      </div>
+      <p class="domination-scroll-hint" aria-hidden="true">Swipe horizontally to view all five videos in each task.</p>
     </div>
   </div>
 </section>
