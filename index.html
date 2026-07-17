@@ -863,6 +863,70 @@
         font-size: 1.15rem;
       }
     }
+
+    /* =========================================================
+       Natural-ratio scroll-selected videos
+       ========================================================= */
+
+    .natural-video-showcase {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .natural-video-frame {
+      position: relative;
+      width: 100%;
+      min-height: 260px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #000;
+      box-shadow: 0 3px 14px rgba(10, 10, 10, 0.14);
+      transition: aspect-ratio 0.2s ease;
+    }
+
+    .natural-video-frame video,
+    #tree.section-scroll-autoplay-video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      background: #000;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      cursor: pointer;
+    }
+
+    .natural-video-frame.has-video-metadata {
+      min-height: 0;
+    }
+
+    /*
+      Earlier layout rules used fixed 16:9 or 4:3 frames. These overrides
+      ensure the final displayed ratio follows each MP4's native dimensions.
+    */
+    .single-video-frame,
+    .task-video-frame,
+    .comparison-video-frame,
+    .natural-video-frame {
+      height: auto !important;
+    }
+
+    .section-scroll-autoplay-video {
+      background: #000;
+    }
+
+    .section-scroll-autoplay-video:focus-visible {
+      outline: 3px solid #3273dc;
+      outline-offset: -3px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .natural-video-frame {
+        min-height: 190px;
+      }
+    }
 </style>
 </head>
 <body>
@@ -921,9 +985,9 @@
 <div class="container is-max-desktop">
 <div class="hero-body">
 <!-- TODO: Replace with your teaser video -->
-<video class="" controls="" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" height="100%" id="tree" loop="" muted="" playsinline="" poster="" preload="metadata">
+<video class="section-scroll-autoplay-video teaser-scroll-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" height="100%" id="tree" loop="" muted="" playsinline="" poster="" preload="none">
 <!-- TODO: Add your video file path here -->
-<source src="static/videos2/CoRL.mp4" type="video/mp4"/>
+<source data-src="static/videos/CoRL.mp4" type="video/mp4"/>
 </video>
 <!-- TODO: Replace with your video description -->
 <h2 class="subtitle has-text-centered">
@@ -1019,12 +1083,12 @@
 <!-- Simulator teleoperation -->
 <div class="teleoperation-subsection" id="simulator-teleoperation">
 <h3 class="title is-3 has-text-centered teleoperation-subtitle">Teleoperation in the simulator</h3>
-<div class="single-video-showcase"><div class="single-video-frame"><video aria-label="Simulator teleoperation overview" class="scroll-autoplay-video teleoperation-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos2/Simtask1-3.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
+<div class="natural-video-showcase"><div class="natural-video-frame"><video aria-label="Teleoperation in the simulator" class="section-scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos/Simtask1-3.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
 <!-- End simulator teleoperation -->
 <!-- Real-world teleoperation -->
 <div class="teleoperation-subsection" id="realworld-teleoperation">
 <h3 class="title is-3 has-text-centered teleoperation-subtitle">Teleoperation in the real-world</h3>
-<div class="single-video-showcase"><div class="single-video-frame"><video aria-label="Real-world teleoperation overview" class="scroll-autoplay-video teleoperation-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos2/Realtask1-3.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
+<div class="natural-video-showcase"><div class="natural-video-frame"><video aria-label="Teleoperation in the real world" class="section-scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos/Realtask1-3.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
 <!-- End real-world teleoperation -->
 </div>
 </section>
@@ -1038,22 +1102,22 @@
 <!-- Adroit -->
 <div class="benchmark-visualization-group" id="adroit-visualization">
 <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Benchmark: Adroit</h3>
-<div class="single-video-showcase"><div class="single-video-frame"><video aria-label="Adroit benchmark interaction point cloud visualization" class="pointcloud-autoplay-video scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos2/Benchmark1.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
+<div class="natural-video-showcase"><div class="natural-video-frame"><video aria-label="Benchmark Adroit interaction point cloud visualization" class="section-scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos/Benchmark1.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
 <!-- End Adroit -->
 <!-- DexArt -->
 <div class="benchmark-visualization-group" id="dexart-visualization">
 <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Benchmark: DexArt</h3>
-<div class="single-video-showcase"><div class="single-video-frame"><video aria-label="DexArt benchmark interaction point cloud visualization" class="pointcloud-autoplay-video scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos2/Benchmark2.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
+<div class="natural-video-showcase"><div class="natural-video-frame"><video aria-label="Benchmark DexArt interaction point cloud visualization" class="section-scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos/Benchmark2.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
 <!-- End DexArt -->
 <!-- Self-Design -->
 <div class="benchmark-visualization-group" id="self-design-visualization">
 <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Self-Design Tasks in IsaacLab</h3>
-<div class="single-video-showcase"><div class="single-video-frame"><video aria-label="Self-designed IsaacLab interaction point cloud visualization" class="pointcloud-autoplay-video scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos2/Benchmark3.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
+<div class="natural-video-showcase"><div class="natural-video-frame"><video aria-label="Self-designed IsaacLab interaction point cloud visualization" class="section-scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos/Benchmark3.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
 <!-- End Self-Design -->
 <!-- Real-World -->
 <div class="benchmark-visualization-group" id="real-world-visualization">
 <h3 class="title is-3 has-text-centered benchmark-visualization-subtitle">Real-World</h3>
-<div class="single-video-showcase"><div class="single-video-frame"><video aria-label="Real-world interaction point cloud visualization" class="pointcloud-autoplay-video scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos2/Benchmark4.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
+<div class="natural-video-showcase"><div class="natural-video-frame"><video aria-label="Real-world interaction point cloud visualization" class="section-scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos/Benchmark4.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
 <!-- End Real-World -->
 </div>
 </section>
@@ -1168,379 +1232,19 @@
 </div>
 <div class="comparison-results-block" id="generalization-unseen-objects">
 <h3 class="title is-3 has-text-centered comparison-results-title">Generalization to Unseen Objects</h3>
-<div aria-label="Generalization to Unseen Objects videos" class="comparison-grid-wrapper" role="region" tabindex="0">
-<div class="comparison-grid">
-<div class="comparison-row">
-<h4 class="comparison-method-label">DP3</h4>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: DP3, example 1" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask2-1.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: DP3, example 2" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask2-6.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: DP3, example 3" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask2-11.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: DP3, example 4" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask3-1.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: DP3, example 5" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask3-6.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: DP3, example 6" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask3-11.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-</div>
-<div class="comparison-row">
-<h4 class="comparison-method-label">ManiFlow</h4>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ManiFlow, example 1" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask2-2.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ManiFlow, example 2" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask2-7.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ManiFlow, example 3" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask2-12.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ManiFlow, example 4" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask3-2.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ManiFlow, example 5" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask3-7.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ManiFlow, example 6" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask3-12.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-</div>
-<div class="comparison-row">
-<h4 class="comparison-method-label">ProxiDex</h4>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ProxiDex, example 1" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask2-5.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ProxiDex, example 2" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask2-10.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ProxiDex, example 3" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask2-15.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ProxiDex, example 4" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask3-5.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ProxiDex, example 5" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask3-10.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Generalization to Unseen Objects: ProxiDex, example 6" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/OODtask3-15.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-</div>
-</div>
-</div>
-<p aria-hidden="true" class="comparison-scroll-hint">Swipe horizontally to view all six videos for each method.</p>
-</div>
+
+
+<div class="natural-video-showcase"><div class="natural-video-frame"><video aria-label="Generalization to unseen objects" class="section-scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos/Unseen.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
 <div class="comparison-results-block" id="robust-clutter-scenarios">
 <h3 class="title is-3 has-text-centered comparison-results-title">Robust to Clutter Scenarios</h3>
-<div aria-label="Robust to Clutter Scenarios videos" class="comparison-grid-wrapper" role="region" tabindex="0">
-<div class="comparison-grid">
-<div class="comparison-row">
-<h4 class="comparison-method-label">DP3</h4>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: DP3, example 1" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask1-1.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: DP3, example 2" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask1-6.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: DP3, example 3" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask2-1.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: DP3, example 4" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask2-6.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: DP3, example 5" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask3-1.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: DP3, example 6" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask3-6.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-</div>
-<div class="comparison-row">
-<h4 class="comparison-method-label">ManiFlow</h4>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ManiFlow, example 1" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask1-2.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ManiFlow, example 2" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask1-7.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ManiFlow, example 3" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask2-2.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ManiFlow, example 4" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask2-7.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ManiFlow, example 5" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask3-2.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ManiFlow, example 6" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask3-7.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-</div>
-<div class="comparison-row">
-<h4 class="comparison-method-label">ProxiDex</h4>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ProxiDex, example 1" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask1-5.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ProxiDex, example 2" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask1-10.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ProxiDex, example 3" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask2-5.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ProxiDex, example 4" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask2-10.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ProxiDex, example 5" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask3-5.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Clutter Scenarios: ProxiDex, example 6" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/CLUtask3-10.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-</div>
-</div>
-</div>
-<p aria-hidden="true" class="comparison-scroll-hint">Swipe horizontally to view all six videos for each method.</p>
-</div>
+
+
+<div class="natural-video-showcase"><div class="natural-video-frame"><video aria-label="Robustness to clutter scenarios" class="section-scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos/Clutter.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
 <div class="comparison-results-block" id="robust-visual-occlusion">
 <h3 class="title is-3 has-text-centered comparison-results-title">Robust to Visual Occlusion</h3>
-<div aria-label="Robust to Visual Occlusion videos" class="comparison-grid-wrapper" role="region" tabindex="0">
-<div class="comparison-grid">
-<div class="comparison-row">
-<h4 class="comparison-method-label">DP3</h4>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: DP3, example 1" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask1-1.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: DP3, example 2" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask1-6.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: DP3, example 3" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask2-1.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: DP3, example 4" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask2-6.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: DP3, example 5" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask3-1.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: DP3, example 6" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask3-5.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-</div>
-<div class="comparison-row">
-<h4 class="comparison-method-label">ManiFlow</h4>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ManiFlow, example 1" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask1-2.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ManiFlow, example 2" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask1-7.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ManiFlow, example 3" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask2-2.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ManiFlow, example 4" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask2-7.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ManiFlow, example 5" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask3-2.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ManiFlow, example 6" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask3-7.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-</div>
-<div class="comparison-row">
-<h4 class="comparison-method-label">ProxiDex</h4>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ProxiDex, example 1" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask1-5.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ProxiDex, example 2" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask1-10.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ProxiDex, example 3" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask2-5.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ProxiDex, example 4" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask2-10.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ProxiDex, example 5" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask3-5.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-<div class="comparison-video-frame">
-<video aria-label="Robust to Visual Occlusion: ProxiDex, example 6" class="manual-click-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none" role="button" tabindex="0">
-<source data-src="static/videos1/ZHEtask3-10.mp4" type="video/mp4"/>
-            Your browser does not support the video tag.
-          </video>
-</div>
-</div>
-</div>
-</div>
-<p aria-hidden="true" class="comparison-scroll-hint">Swipe horizontally to view all six videos for each method.</p>
-</div>
+
+
+<div class="natural-video-showcase"><div class="natural-video-frame"><video aria-label="Robustness to visual occlusion" class="section-scroll-autoplay-video" controlslist="nodownload noremoteplayback" disablepictureinpicture="" disableremoteplayback="" loop="" muted="" playsinline="" preload="none"><source data-src="static/videos/Occulde.mp4" type="video/mp4"/>Your browser does not support the video tag.</video></div></div></div>
 </div>
 </section>
 <!-- End quantitative results -->
@@ -1658,19 +1362,13 @@
 </script>
 </main><script>
 document.addEventListener('DOMContentLoaded', function () {
+  const videos = Array.from(
+    document.querySelectorAll('.section-scroll-autoplay-video')
+  );
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const teaserVideo = document.getElementById('tree');
-  const autoplayVideos = Array.from(
-    document.querySelectorAll('.scroll-autoplay-video')
-  );
-  const manualVideos = Array.from(
-    document.querySelectorAll('.manual-click-video')
-  );
-  const allManagedVideos = [teaserVideo]
-    .concat(autoplayVideos, manualVideos)
-    .filter(Boolean);
+  let animationFrameId = null;
 
-  function loadVideo(video, preloadMode) {
+  function loadVideo(video) {
     if (!video || video.dataset.loaded === 'true') {
       return;
     }
@@ -1683,56 +1381,123 @@ document.addEventListener('DOMContentLoaded', function () {
     source.src = source.dataset.src;
     source.removeAttribute('data-src');
     video.dataset.loaded = 'true';
-    video.preload = preloadMode || 'metadata';
+    video.preload = 'auto';
     video.load();
   }
 
-  function pauseOtherManualVideos(activeVideo) {
-    manualVideos.forEach(function (video) {
+  function applyNaturalAspectRatio(video) {
+    if (!video.videoWidth || !video.videoHeight) {
+      return;
+    }
+
+    const frame = video.closest('.natural-video-frame');
+    if (frame) {
+      frame.style.aspectRatio = video.videoWidth + ' / ' + video.videoHeight;
+      frame.classList.add('has-video-metadata');
+    }
+  }
+
+  function isMeaningfullyVisible(video) {
+    const rect = video.getBoundingClientRect();
+    const viewportHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+
+    const visibleTop = Math.max(rect.top, 0);
+    const visibleBottom = Math.min(rect.bottom, viewportHeight);
+    const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+    const referenceHeight = Math.max(1, Math.min(rect.height, viewportHeight));
+
+    return visibleHeight / referenceHeight >= 0.18;
+  }
+
+  function distanceToViewportCenter(video) {
+    const rect = video.getBoundingClientRect();
+    const videoCenter = rect.top + rect.height / 2;
+    const viewportCenter =
+      (window.innerHeight || document.documentElement.clientHeight) / 2;
+
+    return Math.abs(videoCenter - viewportCenter);
+  }
+
+  function updateActiveVideo() {
+    animationFrameId = null;
+
+    if (document.hidden || reducedMotion.matches) {
+      videos.forEach(function (video) {
+        if (!video.paused) {
+          video.pause();
+        }
+      });
+      return;
+    }
+
+    const visibleVideos = videos.filter(isMeaningfullyVisible);
+
+    if (!visibleVideos.length) {
+      videos.forEach(function (video) {
+        if (!video.paused) {
+          video.pause();
+        }
+      });
+      return;
+    }
+
+    visibleVideos.sort(function (a, b) {
+      return distanceToViewportCenter(a) - distanceToViewportCenter(b);
+    });
+
+    const activeVideo = visibleVideos[0];
+    loadVideo(activeVideo);
+
+    videos.forEach(function (video) {
       if (video !== activeVideo && !video.paused) {
         video.pause();
       }
     });
+
+    const playPromise = activeVideo.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function () {
+        // Muted autoplay may still be disabled by browser or user settings.
+      });
+    }
   }
 
-  function createManualPlayButton(video) {
-    const frame = video.closest('.comparison-video-frame') || video.parentElement;
-    if (!frame) {
+  function scheduleUpdate() {
+    if (animationFrameId !== null) {
       return;
     }
 
-    frame.style.position = 'relative';
+    animationFrameId = window.requestAnimationFrame(updateActiveVideo);
+  }
 
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'custom-video-play-button';
-    button.setAttribute('aria-label', 'Play video');
-    button.textContent = '▶';
-    frame.appendChild(button);
+  videos.forEach(function (video) {
+    video.tabIndex = 0;
+    video.setAttribute('role', 'button');
 
-    function startVideo() {
-      pauseOtherManualVideos(video);
-      loadVideo(video, 'auto');
-
-      const playPromise = video.play();
-      if (playPromise && typeof playPromise.catch === 'function') {
-        playPromise.catch(function () {
-          button.classList.remove('is-hidden');
-        });
-      }
-    }
-
-    button.addEventListener('click', function (event) {
-      event.preventDefault();
-      event.stopPropagation();
-      startVideo();
+    video.addEventListener('loadedmetadata', function () {
+      applyNaturalAspectRatio(video);
+      scheduleUpdate();
     });
 
+    /*
+      Clicking the active video pauses it; clicking a paused video makes it
+      the manually selected active video until the next meaningful scroll.
+    */
     video.addEventListener('click', function () {
-      if (video.dataset.loaded !== 'true') {
-        startVideo();
-      } else if (video.paused) {
-        startVideo();
+      if (video.paused) {
+        loadVideo(video);
+
+        videos.forEach(function (otherVideo) {
+          if (otherVideo !== video && !otherVideo.paused) {
+            otherVideo.pause();
+          }
+        });
+
+        const playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(function () {});
+        }
       } else {
         video.pause();
       }
@@ -1742,109 +1507,32 @@ document.addEventListener('DOMContentLoaded', function () {
       if (event.key !== 'Enter' && event.key !== ' ') {
         return;
       }
+
       event.preventDefault();
-
-      if (video.dataset.loaded !== 'true' || video.paused) {
-        startVideo();
-      } else {
-        video.pause();
-      }
-    });
-
-    video.addEventListener('play', function () {
-      button.classList.add('is-hidden');
-    });
-
-    video.addEventListener('pause', function () {
-      button.classList.remove('is-hidden');
-    });
-
-    video.addEventListener('ended', function () {
-      button.classList.remove('is-hidden');
-    });
-  }
-
-  manualVideos.forEach(createManualPlayButton);
-
-  if ('IntersectionObserver' in window) {
-    /*
-      Only the two Teleoperation videos and four Interaction Point Cloud videos
-      are loaded and autoplayed while sufficiently visible.
-    */
-    const autoplayObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        const video = entry.target;
-        const shouldPlay =
-          entry.isIntersecting &&
-          entry.intersectionRatio >= 0.35 &&
-          !document.hidden &&
-          !reducedMotion.matches;
-
-        if (shouldPlay) {
-          loadVideo(video, 'auto');
-
-          const playPromise = video.play();
-          if (playPromise && typeof playPromise.catch === 'function') {
-            playPromise.catch(function () {
-              // Muted autoplay can still be blocked by some browser settings.
-            });
-          }
-        } else if (!video.paused) {
-          video.pause();
-        }
-      });
-    }, {
-      threshold: [0, 0.35, 0.65]
-    });
-
-    autoplayVideos.forEach(function (video) {
-      autoplayObserver.observe(video);
-    });
-
-    /*
-      Manual result videos never load merely because the user scrolls past
-      them. They are paused when they leave the viewport.
-    */
-    const manualPauseObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting && !entry.target.paused) {
-          entry.target.pause();
-        }
-      });
-    }, {
-      threshold: 0
-    });
-
-    manualVideos.forEach(function (video) {
-      manualPauseObserver.observe(video);
-    });
-  }
-
-  document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) {
-      return;
-    }
-
-    allManagedVideos.forEach(function (video) {
-      if (!video.paused) {
-        video.pause();
-      }
+      video.click();
     });
   });
 
-  if (typeof reducedMotion.addEventListener === 'function') {
-    reducedMotion.addEventListener('change', function () {
-      if (!reducedMotion.matches) {
-        return;
-      }
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate, { passive: true });
 
-      autoplayVideos.forEach(function (video) {
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      videos.forEach(function (video) {
         if (!video.paused) {
           video.pause();
         }
       });
-    });
+    } else {
+      scheduleUpdate();
+    }
+  });
+
+  if (typeof reducedMotion.addEventListener === 'function') {
+    reducedMotion.addEventListener('change', scheduleUpdate);
   }
+
+  scheduleUpdate();
 });
 </script></body>
 </html>
